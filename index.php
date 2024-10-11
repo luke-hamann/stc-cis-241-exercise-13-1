@@ -7,6 +7,7 @@ session_start();
 
 // Create a cart array if needed
 if (empty($_SESSION['cart13'])) $_SESSION['cart13'] = array();
+$cart = $_SESSION['cart13'];
 
 // Create a table of products
 $products = array();
@@ -31,15 +32,15 @@ switch($action) {
     case 'add':
         $key = filter_input(INPUT_POST, 'productkey');
         $quantity = filter_input(INPUT_POST, 'itemqty');
-        add_item($key, $quantity);
+        $_SESSION['cart13'] = add_item($cart, $key, $quantity);
         include('cart_view.php');
         break;
     case 'update':
         $new_qty_list = filter_input(INPUT_POST, 'newqty', 
                 FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
         foreach($new_qty_list as $key => $qty) {
-            if ($_SESSION['cart13'][$key]['qty'] != $qty) {
-                update_item($key, $qty);
+            if ($cart[$key]['qty'] != $qty) {
+                $_SESSION['cart13'] = update_item($cart, $key, $qty);
             }
         }
         include('cart_view.php');
