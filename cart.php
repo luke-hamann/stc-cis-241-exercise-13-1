@@ -1,4 +1,6 @@
 <?php
+namespace hamann\cart;
+
 // Add an item to the cart
 function add_item(&$cart, $key, $quantity) {
     global $products;
