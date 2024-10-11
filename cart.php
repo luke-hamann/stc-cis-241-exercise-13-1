@@ -2,13 +2,13 @@
 // Add an item to the cart
 function add_item(&$cart, $key, $quantity) {
     global $products;
-    if ($quantity < 1) return $cart;
+    if ($quantity < 1) return;
 
     // If item already exists in cart, update quantity
     if (isset($cart[$key])) {
         $quantity += $cart[$key]['qty'];
-        $cart = update_item($cart, $key, $quantity);
-        return $cart;
+        update_item($cart, $key, $quantity);
+        return;
     }
 
     // Add item
@@ -21,8 +21,6 @@ function add_item(&$cart, $key, $quantity) {
         'total' => $total
     );
     $cart[$key] = $item;
-
-    return $cart;
 }
 
 // Update an item in the cart
@@ -38,8 +36,6 @@ function update_item(&$cart, $key, $quantity) {
             $cart[$key]['total'] = $total;
         }
     }
-
-    return $cart;
 }
 
 // Get cart subtotal
