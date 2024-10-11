@@ -32,7 +32,7 @@ switch($action) {
     case 'add':
         $key = filter_input(INPUT_POST, 'productkey');
         $quantity = filter_input(INPUT_POST, 'itemqty');
-        $_SESSION['cart13'] = add_item($cart, $key, $quantity);
+        add_item($_SESSION['cart13'], $key, $quantity);
         include('cart_view.php');
         break;
     case 'update':
@@ -40,7 +40,7 @@ switch($action) {
                 FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
         foreach($new_qty_list as $key => $qty) {
             if ($cart[$key]['qty'] != $qty) {
-                $_SESSION['cart13'] = update_item($cart, $key, $qty);
+                update_item($_SESSION['cart13'], $key, $qty);
             }
         }
         include('cart_view.php');
